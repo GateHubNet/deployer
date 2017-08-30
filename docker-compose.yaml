@@ -1,0 +1,25 @@
+deployer:
+    build: .
+    links:
+        - mysql
+        - etcd
+    volumes:
+        - "./resources:/usr/local/deployer/resources"
+        - "./inputs:/usr/local/deployer/inputs:ro"
+    environment:
+        TF_VAR_etcd_endpoints: http://etcd:4001
+        LOCK_ENDPOINT: http://etcd:2379/v2/keys/deployer_global_lock
+        # EXIT_ON_ERROR: 1
+    restart: on-failure
+mysql:
+    image: mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: example
+    ports:
+        - "3306:3306"
+etcd:
+    image: elcolio/etcd
+    volumes:
+        - "./tmp/etcd:/data"
+    ports:
+        - "2379:2379"
