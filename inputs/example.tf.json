@@ -1,0 +1,42 @@
+{
+  "provider": {
+    "mysql": {
+      "endpoint": "mysql:3306",
+      "password": "example",
+      "username": "root"
+    }
+  },
+  "resource": {
+    "mysql_database": {
+      "database1": {
+        "lifecycle": {
+          "prevent_destroy": true
+        },
+        "name": "database1"
+      }
+    },
+    "mysql_user": {
+      "user1": {
+        "user": "user1",
+        "host": "mysql",
+        "password": "password1"
+      }
+    },
+    "mysql_grant": {
+      "user1": {
+        "user": "user1",
+        "host": "mysql",
+        "database": "database1",
+        "privileges": ["SELECT", "UPDATE"]
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "etcd": {
+        "endpoints": "http://etcd:4001",
+        "path": "terraform-tfstate"
+      }
+    }
+  }
+}

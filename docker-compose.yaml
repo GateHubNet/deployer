@@ -4,10 +4,9 @@ deployer:
         - mysql
         - etcd
     volumes:
-        - "./resources:/usr/local/deployer/resources"
+        # - "./resources:/usr/local/deployer/resources"
         - "./inputs:/usr/local/deployer/inputs:ro"
     environment:
-        TF_VAR_etcd_endpoints: http://etcd:4001
         LOCK_ENDPOINT: http://etcd:2379/v2/keys/deployer_global_lock
         # EXIT_ON_ERROR: 1
     restart: on-failure
