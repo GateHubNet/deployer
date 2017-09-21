@@ -4,11 +4,35 @@ deployer:
         - mysql
         - etcd
     volumes:
-        # - "./resources:/usr/local/deployer/resources"
         - "./inputs:/usr/local/deployer/inputs:ro"
     environment:
         LOCK_ENDPOINT: http://etcd:2379/v2/keys/deployer_global_lock
-        # EXIT_ON_ERROR: 1
+        IMPORT_CMD: mysql_database.database1 database1
+        IMPORT_TF: |
+            provider "mysql" {
+                endpoint = "mysql:3306"
+                password = "example"
+                username = "root"
+            }
+            terraform {
+                backend "etcd" {
+                    endpoints = "http://etcd:2379"
+                    path = "terraform-tfstate-mysql"
+                }
+            }
+
+            resource "mysql_database" "database1" {
+                default_collation = "utf8_unicode_ci"
+                name = "database1"
+            }
+            resource "mysql_user" "user1" {
+                user = "user1"
+            }
+            resource "mysql_grant" "grant1" {
+                database = "database1"
+                privileges = [ "ALL" ]
+                user = "user1"
+            }
     restart: on-failure
 mysql:
     image: mysql
