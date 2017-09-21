@@ -1,6 +1,7 @@
 #!/bin/sh
 
 APPLY_COMMAND="./src/apply.sh"
+ERROR_SLEEP_SECONDS="${ERROR_SLEEP_SECONDS:-10}"
 
 mkdir -p /usr/local/deployer/resources
 
@@ -52,8 +53,8 @@ do
         then
             echo "Resources applied!"
         else
-            echo "Error: $APPLY_EXIT_STATUS, sleeping ..."
-            sleep 6
+            echo "Error: $APPLY_EXIT_STATUS, sleeping $ERROR_SLEEP_SECONDS ..."
+            sleep $ERROR_SLEEP_SECONDS
             if [[ $EXIT_ON_ERROR ]]
             then
                 exit $APPLY_EXIT_STATUS
