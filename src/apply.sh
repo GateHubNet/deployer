@@ -6,4 +6,4 @@ cd /usr/local/deployer/resources
 terraform init
 
 # apply changes to infrastructure
-terraform apply
+terraform apply -auto-approve

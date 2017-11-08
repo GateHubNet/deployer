@@ -14,19 +14,6 @@ do
     then
         # atime of resource files changed
 
-        # wait on global lock
-        while true
-        do
-            curl -s $LOCK_ENDPOINT | grep -q '"value":"lock"'
-            if [ $? -eq 0 ]
-            then
-                echo "Locked ..."
-                sleep 1
-            else
-                break
-            fi
-        done
-
         # separation of resource files and data files
         # remove previous symlinks
         find /usr/local/deployer/resources -type l -maxdepth 1 -delete
@@ -39,15 +26,9 @@ do
             index=$(($index+1))
         done
 
-        # set global lock
-        curl -s -XPUT $LOCK_ENDPOINT -d value="lock"
-
         # apply terraform resources
         $APPLY_COMMAND
         APPLY_EXIT_STATUS=$?
-
-        # remove global lock
-        curl -s -XDELETE $LOCK_ENDPOINT
 
         if [ $APPLY_EXIT_STATUS -eq 0 ]
         then

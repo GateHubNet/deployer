@@ -18,14 +18,14 @@
     "mysql_user": {
       "user1": {
         "user": "user1",
-        "host": "mysql",
-        "password": "password1"
+        "host": "%",
+        "plaintext_password": "password1"
       }
     },
     "mysql_grant": {
       "user1": {
         "user": "user1",
-        "host": "mysql",
+        "host": "%",
         "database": "database1",
         "privileges": ["SELECT", "UPDATE"]
       }
@@ -33,9 +33,10 @@
   },
   "terraform": {
     "backend": {
-      "etcd": {
-        "endpoints": "http://etcd:4001",
-        "path": "terraform-tfstate"
+      "etcdv3": {
+        "endpoints": ["http://etcd:2379"],
+        "prefix": "terraform-tfstate/",
+        "lock": true
       }
     }
   }
