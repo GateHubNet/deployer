@@ -1,4 +1,4 @@
-FROM hashicorp/terraform:0.11.0-beta1
+FROM xtruder/terraform:0.11.1-goversion
 
 WORKDIR /usr/local/deployer
 
