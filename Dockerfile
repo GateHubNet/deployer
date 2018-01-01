@@ -4,8 +4,16 @@ WORKDIR /usr/local/deployer
 
 ADD . /usr/local/deployer
 
+RUN mkdir -p /root/.terraform.d/plugins
+
 RUN git clone https://github.com/xtruder/terraform-provider-mysql.git $GOPATH/src/github.com/terraform-providers/terraform-provider-mysql
-RUN cd $GOPATH/src/github.com/terraform-providers/terraform-provider-mysql && go install
-RUN mkdir -p /root/.terraform.d/plugins && cp $GOPATH/bin/terraform-provider-mysql /root/.terraform.d/plugins
+RUN go get github.com/terraform-providers/terraform-provider-mysql
+RUN go install github.com/terraform-providers/terraform-provider-mysql
+RUN cp $GOPATH/bin/terraform-provider-mysql /root/.terraform.d/plugins
+
+RUN git clone https://github.com/xtruder/terraform-provider-s3.git $GOPATH/src/github.com/negronjl/terraform-provider-s3
+RUN go get github.com/negronjl/terraform-provider-s3
+RUN go install github.com/negronjl/terraform-provider-s3
+RUN cp $GOPATH/bin/terraform-provider-s3 /root/.terraform.d/plugins
 
 ENTRYPOINT src/loop.sh
