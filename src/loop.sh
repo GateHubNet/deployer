@@ -38,7 +38,7 @@ do
                 exit $APPLY_EXIT_STATUS
             fi
         else
-            echo "Error: $APPLY_EXIT_STATUS, sleeping $ERROR_SLEEP_SECONDS ..."
+            echo "Error: $APPLY_EXIT_STATUS"
             sleep $ERROR_SLEEP_SECONDS
             if [[ $EXIT_ON_ERROR ]]
             then
@@ -46,6 +46,8 @@ do
             else
                 NEW_OUTPUT=""
             fi
+            echo "sleeping $ERROR_SLEEP_SECONDS ..."
+            sleep $ERROR_SLEEP_SECONDS
         fi
 
         OLD_OUTPUT="$NEW_OUTPUT"
