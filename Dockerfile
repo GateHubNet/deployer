@@ -11,6 +11,11 @@ RUN go get github.com/terraform-providers/terraform-provider-mysql
 RUN go install github.com/terraform-providers/terraform-provider-mysql
 RUN cp $GOPATH/bin/terraform-provider-mysql /root/.terraform.d/plugins
 
+RUN git clone https://github.com/xtruder/terraform-provider-vault.git $GOPATH/src/github.com/terraform-providers/terraform-provider-vault
+RUN go get github.com/terraform-providers/terraform-provider-vault
+RUN go install github.com/terraform-providers/terraform-provider-vault
+RUN cp $GOPATH/bin/terraform-provider-vault /root/.terraform.d/plugins
+
 RUN git clone https://github.com/xtruder/terraform-provider-s3.git $GOPATH/src/github.com/negronjl/terraform-provider-s3
 RUN go get github.com/negronjl/terraform-provider-s3
 RUN go install github.com/negronjl/terraform-provider-s3
