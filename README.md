@@ -20,6 +20,7 @@ To apply ./inputs/example.tf.json, for more details look in the docker-compose.y
 # Env variables
 
  - EXIT_ON_ERROR: set to exit on apply error, otherwise it will retry until success
+ - EXIT_ON_SUCCESS: set to exit on successfull apply, otherwise it will retry on change
 
 For examples look into docker-compose.yaml
 

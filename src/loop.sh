@@ -33,6 +33,10 @@ do
         if [ $APPLY_EXIT_STATUS -eq 0 ]
         then
             echo "Resources applied!"
+            if [[ $EXIT_ON_SUCCESS ]]
+            then
+                exit $APPLY_EXIT_STATUS
+            fi
         else
             echo "Error: $APPLY_EXIT_STATUS, sleeping $ERROR_SLEEP_SECONDS ..."
             sleep $ERROR_SLEEP_SECONDS
