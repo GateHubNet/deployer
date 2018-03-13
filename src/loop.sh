@@ -39,7 +39,6 @@ do
             fi
         else
             echo "Error: $APPLY_EXIT_STATUS"
-            sleep $ERROR_SLEEP_SECONDS
             if [[ $EXIT_ON_ERROR ]]
             then
                 exit $APPLY_EXIT_STATUS
