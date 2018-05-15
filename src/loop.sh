@@ -5,6 +5,7 @@ ERROR_SLEEP_SECONDS="${ERROR_SLEEP_SECONDS:-10}"
 
 mkdir -p /usr/local/deployer/resources
 
+trap "exit" SIGTERM
 while true
 do
     RESOURCES=`find /usr/local/deployer/inputs -type f ( -iname '*.tf' -or -iname '*.tf.json' )`
