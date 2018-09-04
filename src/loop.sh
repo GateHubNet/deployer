@@ -9,7 +9,7 @@ trap "exit" SIGTERM
 while true
 do
     RESOURCES=`find /usr/local/deployer/inputs -type f ( -iname '*.tf' -or -iname '*.tf.json' )`
-    NEW_OUTPUT="`echo $RESOURCES | xargs ls -le`"
+    NEW_OUTPUT="`echo $RESOURCES | xargs ls -l`"
 
     if [ "$NEW_OUTPUT" != "$OLD_OUTPUT" ]
     then
