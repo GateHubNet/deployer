@@ -15,7 +15,7 @@ deployer2:
         - "./inputs:/usr/local/deployer/inputs:ro"
     restart: on-failure
 mysql:
-    image: mysql
+    image: mysql:5
     environment:
         MYSQL_ROOT_PASSWORD: example
     volumes:
