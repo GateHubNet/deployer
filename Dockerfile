@@ -24,11 +24,9 @@ WORKDIR /usr/local/deployer
 
 ADD . /usr/local/deployer
 
-RUN mkdir -p /root/.terraform.d/plugins
-
-COPY --from=0 /go/bin/terraform-provider-mysql /root/.terraform.d/plugins
-COPY --from=0 /go/bin/terraform-provider-vault /root/.terraform.d/plugins
-COPY --from=0 /go/bin/terraform-provider-kubernetes /root/.terraform.d/plugins
-COPY --from=0 /go/bin/terraform-provider-s3 /root/.terraform.d/plugins
+COPY --from=0 /go/bin/terraform-provider-mysql resources/
+COPY --from=0 /go/bin/terraform-provider-vault resources/
+COPY --from=0 /go/bin/terraform-provider-kubernetes resources/
+COPY --from=0 /go/bin/terraform-provider-s3 resources/
 
 ENTRYPOINT src/loop.sh
